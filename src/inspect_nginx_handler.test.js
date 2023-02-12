@@ -1,4 +1,4 @@
-import {listAllDomains} from "./inspect_nginx_handler.js";
+import {listAllSites} from "./inspect_nginx_handler.js";
 import Path from "path";
 import {getHomeFolder} from "./shared/system_processor.js";
 import {createRedirectedDomain} from "./redirect_domain_handler.js";
@@ -13,7 +13,7 @@ describe('Inspect nginx domain Test', function () {
         await createRedirectedDomain({nginxFolder: nginxFolder, domain: domainName, port: 3000, useSSL: false})
         domainName = "seconddomain.com";
         await createRedirectedDomain({nginxFolder: nginxFolder, domain: domainName, port: 3000, useSSL: false})
-        const domains = await listAllDomains({nginxFolder: nginxFolder })
+        const domains = await listAllSites({nginxFolder: nginxFolder })
 
         console.log("Domains: ", domains);
         expect(domains).to.contain("firstdomain.com")

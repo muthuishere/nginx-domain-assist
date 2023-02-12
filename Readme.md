@@ -68,22 +68,22 @@ sudo create-static-nginx-domain --domain "static.test.com" --path "/var/www/html
 The above can also run in wizard mode , if you just run the command <i>create-static-nginx-domain</i> without any options
 
 
-##### To remove a domain use the following command:
+##### To remove a site use the following command:
 ```
-sudo delete-nginx-domain --domain "static.test.com" 
+sudo delete-nginx-site --site "static.test.com" 
 # it will remove 
-# > a file in /etc/nginx/sites-available/static.test.com 
-# > a symlink in /etc/nginx/sites-enabled/dev.test.com
-# > SSL certificates via certbot
+# > a file in /etc/nginx/sites-available/static.test.com.conf
+# > a symlink in /etc/nginx/sites-enabled/static.test.com.conf
+# > SSL certificates via certbot 
 # > restart nginx
 ```
 
 
 
-##### To list all domains use the following command:
+##### To list all sites configured use the following command:
 ```
-sudo list-all-nginx-domains
-# it will list all domains in /etc/nginx/sites-available
+sudo list-all-nginx-sites
+# it will list all sites available in /etc/nginx/sites-available
 ```
 
 ALternatively you can use the below packages

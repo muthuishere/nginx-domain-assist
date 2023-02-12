@@ -2,7 +2,8 @@
 
 import {isSudo} from "../src/shared/system_processor.js";
 import {getParametersBasedOnOptions} from "../src/shared/input_arg_processor.js";
-import {deleteDomainInNginx} from "../src/delete_domain_handler.js";
+import {listAllSites} from "../src/inspect_nginx_handler.js";
+
 
 const options = {
     nginxFolder: {
@@ -15,18 +16,7 @@ const options = {
         // shared
         type: 'string',
         default: "/etc/nginx",
-    },
-    domain: {
-        // inquirer
-        message: 'Name of domain?',
-        name: 'domain',
-        // yargs
-        demandOption: true,
-        describe: 'Name of the domain',
-        // shared
-        type: 'string',
-        default: 'example.com',
-    },
+    }
 
 };
 
@@ -41,9 +31,9 @@ const options = {
     }
     try {
     const inputs = await getParametersBasedOnOptions(process.argv,options);
-    await deleteDomainInNginx(inputs);
+    await listAllSites(inputs);
 }catch (err) {
-        console.log("Unable to Delete Domains")
+        console.log("Unable to list Sites")
     console.error(err);
     process.exit(1);
 }

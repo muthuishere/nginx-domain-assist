@@ -2,8 +2,7 @@
 
 import {isSudo} from "../src/shared/system_processor.js";
 import {getParametersBasedOnOptions} from "../src/shared/input_arg_processor.js";
-import {listAllDomains} from "../src/inspect_nginx_handler.js";
-
+import {deleteSiteInNginx} from "../src/delete_domain_handler.js";
 
 const options = {
     nginxFolder: {
@@ -16,7 +15,18 @@ const options = {
         // shared
         type: 'string',
         default: "/etc/nginx",
-    }
+    },
+    site: {
+        // inquirer
+        message: 'Name of site to be deleted from Nginx?',
+        name: 'site',
+        // yargs
+        demandOption: true,
+        describe: 'Name of the Site to be deleted from Nginx',
+        // shared
+        type: 'string',
+        default: 'example.com',
+    },
 
 };
 
@@ -31,9 +41,9 @@ const options = {
     }
     try {
     const inputs = await getParametersBasedOnOptions(process.argv,options);
-    await listAllDomains(inputs);
+    await deleteSiteInNginx(inputs);
 }catch (err) {
-        console.log("Unable to Delete Domains")
+        console.log("Unable to Delete Site")
     console.error(err);
     process.exit(1);
 }

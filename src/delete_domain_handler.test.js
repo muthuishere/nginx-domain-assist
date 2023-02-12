@@ -1,4 +1,4 @@
-import {deleteDomainInNginx} from "./delete_domain_handler.js";
+import {deleteSiteInNginx} from "./delete_domain_handler.js";
 import Path from "path";
 import {getHomeFolder} from "./shared/system_processor.js";
 import {createRedirectedDomain} from "./redirect_domain_handler.js";
@@ -14,7 +14,7 @@ describe('Delete domain Test', function () {
         let domainName = "deletabledomain.com";
         await createRedirectedDomain({nginxFolder: nginxFolder, domain: domainName, port: 3000, useSSL: false})
 
-        await deleteDomainInNginx({nginxFolder: nginxFolder, domain: domainName})
+        await deleteSiteInNginx({nginxFolder: nginxFolder, site: domainName})
 
         //expect nginxFolder not exists
 
