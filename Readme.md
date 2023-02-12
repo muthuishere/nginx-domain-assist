@@ -8,37 +8,83 @@ Nginx Domain Assist
 ===================
 
 An NodeJS CLI to help you configure Nginx domains on your server with ease.
-it has CLI options and a wizard to help you configure your domains.
+it has CLI options and a wizard to help you configure your domains. (Works only in Ubuntu  as of now
 
 The type of virtual host might be one of the following:
 - redirect domain requests to a port running on docker or kubernetes(e.g. 8080)
 - redirect to statically hosted site directory
 
 
+#### install
+
+```
+
+npm install -g nginx-domain-assist
+
+```
+
+can use npx as well
+
+
 
 #### Features
 
-> can pass options to the CLI
-
-> has wizard mode as well to choose options
+- can pass options to the CLI
+- has wizard mode as well to choose options
+- can create a virtual host for a domain and redirect to a port
+- can create a virtual host for a domain and serve from a directory
+- can list all domains
+- can delete domains
 
 
 #### Usage
 
 
 
-To redirect to port use the following command:
+##### To create a domain and redirect to port use the following command:
 ```
-sudo create-redirected-virtual-domain --domain "dev.test.com" --port 3456
+sudo create-redirected-nginx-domain --domain "dev.test.com" --port 3456
 
 # it will create a file in /etc/nginx/sites-available/dev.test.com to a port forwarded to 3456 ( assuming some app is watching on that port to serve http )
 # and create a symlink in /etc/nginx/sites-enabled/dev.test.com
 # and restart nginx
 ```
 
+![create-redirect.png](assets%2Fcreate-redirect.png)
+
+The above can also run in wizard mode , if you just run the command <i>create-redirected-nginx-domain</i> without any options
 
 
-
-To redirect to a directory use the following command:
+##### To create a domain and serve from a folder use the following command:
 ```
-sudo create-static-virtual-domain --domain "dev.test.com" --directory "/var/www/html"
+sudo create-static-nginx-domain --domain "static.test.com" --path "/var/www/html" 
+# it will create
+# > a file in /etc/nginx/sites-available/static.test.com and serve from /var/www/html
+# > a symlink in /etc/nginx/sites-enabled/dev.test.com
+# > restart nginx
+```
+![create-static.png](assets%2Fcreate-static.png)
+
+The above can also run in wizard mode , if you just run the command <i>create-static-nginx-domain</i> without any options
+
+
+##### To remove a domain use the following command:
+```
+sudo delete-nginx-domain --domain "static.test.com" 
+# it will remove 
+# > a file in /etc/nginx/sites-available/static.test.com 
+# > a symlink in /etc/nginx/sites-enabled/dev.test.com
+# > SSL certificates via certbot
+# > restart nginx
+```
+
+
+
+##### To list all domains use the following command:
+```
+sudo list-all-nginx-domains
+# it will list all domains in /etc/nginx/sites-available
+```
+
+ALternatively you can use the below packages
+[https://www.npmjs.com/package/nginx](https://www.npmjs.com/package/nginx)

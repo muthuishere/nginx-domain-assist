@@ -1,8 +1,9 @@
 #! /usr/bin/env node
 
-import {createDomainWithPortRedirection} from "../src/redirectsite.js";
+
 import {isSudo} from "../src/shared/system_processor.js";
 import {getParametersBasedOnOptions} from "../src/shared/input_arg_processor.js";
+import {createRedirectedDomain} from "../src/redirect_domain_handler.js";
 
 const options = {
 
@@ -62,7 +63,7 @@ const options = {
 
 
     try {
-        await createDomainWithPortRedirection(inputs);
+        await createRedirectedDomain(inputs);
         process.exit(0);
     }catch (err) {
         console.error(err);

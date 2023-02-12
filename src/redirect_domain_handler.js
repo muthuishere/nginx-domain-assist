@@ -5,7 +5,7 @@ import * as Path from "path";
 import {enableSSL, restartNginx} from "./nginx.js";
 
 
-export async function createDomainWithPortRedirection({nginxFolder, domain, port, useSSL}) {
+export async function createRedirectedDomain({nginxFolder, domain, port, useSSL}) {
 
     const input = {
         "nginxFolder": nginxFolder,
@@ -14,16 +14,9 @@ export async function createDomainWithPortRedirection({nginxFolder, domain, port
         "useSSL": useSSL
     }
     console.log("Received Inputs", input);
-    await createRedirectSite(input)
-    console.log("Created Redirect Site on Nginx for domain: " + domain + " to be redirected to port running on " + port);
-
-
-}
-
-async function createRedirectSite({nginxFolder, domainName, redirectPort, useSSL}) {
-
-    const nginxSitesAvailableFolder = nginxFolder + Path.sep + 'sites-available'
-    const nginxSitesEnabledFolder = nginxFolder + Path.sep + 'sites-enabled'
+    let {nginxFolder: nginxFolder1, domainName, redirectPort, useSSL: useSSL1} = input;
+    const nginxSitesAvailableFolder = nginxFolder1 + Path.sep + 'sites-available'
+    const nginxSitesEnabledFolder = nginxFolder1 + Path.sep + 'sites-enabled'
     let siteAvailableFolder = Path.join(nginxSitesAvailableFolder, domainName + '.conf');
     let siteEnabledLink = Path.join(nginxSitesEnabledFolder, domainName + '.conf');
 
@@ -38,9 +31,11 @@ async function createRedirectSite({nginxFolder, domainName, redirectPort, useSSL
 
     await restartNginx();
 
-    if (useSSL) {
+    if (useSSL1) {
         await enableSSL(domainName);
     }
+    console.log("Created Redirect Site on Nginx for domain: " + domain + " to be redirected to port running on " + port);
+
 
 }
 

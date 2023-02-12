@@ -44,7 +44,7 @@ export function hasHelpOrVersion(processArgs) {
 }
 
 export async function getParametersBasedOnOptions(processArgs, cliOptions) {
-     console.log(processArgs)
+
 
     if (hasHelpOrVersion(processArgs)) {
         yargs(hideBin(processArgs)).usage('Usage: npx $0').options(cliOptions).help().version().argv;

@@ -1,7 +1,7 @@
 import {deleteDomainInNginx} from "./delete_domain_handler.js";
 import Path from "path";
 import {getHomeFolder} from "./shared/system_processor.js";
-import {createDomainWithPortRedirection} from "./redirect_domain_handler.js";
+import {createRedirectedDomain} from "./redirect_domain_handler.js";
 import {expect} from "chai";
 import fs from "fs";
 
@@ -12,7 +12,7 @@ describe('Delete domain Test', function () {
 
         const nginxFolder = Path.join(getHomeFolder() , "test/resources/nginx") ;
         let domainName = "deletabledomain.com";
-        await createDomainWithPortRedirection({nginxFolder: nginxFolder, domain: domainName, port: 3000, useSSL: false})
+        await createRedirectedDomain({nginxFolder: nginxFolder, domain: domainName, port: 3000, useSSL: false})
 
         await deleteDomainInNginx({nginxFolder: nginxFolder, domain: domainName})
 

@@ -11,7 +11,7 @@
     "preversion": "npm run lint",
     "postversion": "git push && git push --tags",
     "version": "npm run format && git add -A src bin",
-    "publish-package": "npm run build && npm publish",
+    "publish-package": "npm publish",
     "release": "npm run env &&  release-it patch --github.autoGenerate",
     "release-local": "npm run env &&  release-it patch --github.autoGenerate --npm.publish=true  --git.commitMessage='release-patch v${version}'",
     "release-dryrun": "npm run env &&  release-it patch  --github.autoGenerate --dry-run",
