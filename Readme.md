@@ -2,6 +2,7 @@
 ![Coverage](https://img.shields.io/codecov/c/github/muthuishere/nginx-domain-assist)
 ![License](https://img.shields.io/npm/l/nginx-domain-assist)
 ![Version](https://img.shields.io/npm/v/nginx-domain-assist)
+![node-current](https://img.shields.io/node/v/nginx-domain-assist)
 
 
 Nginx Domain Assist
