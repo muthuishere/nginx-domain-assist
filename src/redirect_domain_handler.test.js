@@ -4,7 +4,7 @@
 import {expect} from "chai";
 import {getHomeFolder} from "./shared/system_processor.js";
 import * as Path from "path";
-import {createDomainWithPortRedirection} from "./virtual_host_redirect_handler.js";
+import {createDomainWithPortRedirection} from "./redirect_domain_handler.js";
 import {readFile} from "./shared/files.js";
 import fs from "fs";
 

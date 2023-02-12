@@ -38,16 +38,21 @@ export async function deleteFile(filename) {
 
 
         try {
-            const res  = fs.rmSync(filename, {
+
+            if(fs.existsSync(filename) == false){
+              throw new Error("File does not exist: " + filename);
+            }
+
+
+         fs.rmSync(filename, {
                 force: true,
             });
 
-            if(undefined === res){
-                reject("file not exist");
-            }
 
-            resolve(res);
+            resolve();
         }catch (e) {
+            console.log("Error deleting file: " + filename);
+            console.error(e)
             reject(e);
         }
 

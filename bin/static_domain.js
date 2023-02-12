@@ -2,7 +2,7 @@
 
 import {isSudo} from "../src/shared/system_processor.js";
 import {getParametersBasedOnOptions} from "../src/shared/input_arg_processor.js";
-import {createStaticDomain} from "../src/virtual_host_domain_handler.js";
+import {createStaticDomain} from "../src/static_domain_handler.js";
 
 const options = {
 

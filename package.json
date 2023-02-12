@@ -1,6 +1,6 @@
 {
   "name": "nginx-domain-assist",
-  "version": "1.0.0",
+  "version": "0.5.0",
   "description": "Manage Nginx on Ubuntu based Machines",
   "main": "index.js",
   "type": "module",
@@ -18,8 +18,14 @@
     "release-minor": "npm run env &&  release-it minor"
   },
   "bin": {
-    "create-redirected-virtual-domain": "./bin/virtual_host_redirect.js",
-    "create-static-virtual-domain": "./bin/virtual_host_domain.js"
+    "create-redirected-nginx-domain": "bin/redirected_domain.js",
+    "create-static-nginx-domain": "bin/static_domain.js",
+    "delete-nginx-domain": "./bin/delete_domain.js",
+    "list-all-nginx-domains": "./bin/list_domain.js",
+    "@nginx-domain-assist/create-redirected-domain": "bin/redirected_domain.js",
+    "@nginx-domain-assist/create-static-domain": "bin/static_domain.js",
+    "@nginx-domain-assist/delete-domain": "./bin/delete_domain.js",
+    "@nginx-domain-assist/list-domains": "./bin/list_domain.js"
   },
   "nyc": {
     "check-coverage": true,

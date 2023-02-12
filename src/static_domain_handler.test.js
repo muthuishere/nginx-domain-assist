@@ -1,7 +1,7 @@
 import {expect} from "chai";
 import {getHomeFolder} from "./shared/system_processor.js";
 import * as Path from "path";
-import {createStaticDomain} from "./virtual_host_domain_handler.js";
+import {createStaticDomain} from "./static_domain_handler.js";
 import {readFile} from "./shared/files.js";
 import fs from "fs";
 
