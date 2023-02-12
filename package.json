@@ -1,31 +1,24 @@
 {
   "name": "nginx-domain-assist",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Manage Nginx on Ubuntu based Machines",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "coverage": "nyc npm run test",
     "test": "mocha --experimental-loader=@istanbuljs/esm-loader-hook 'src/**/*.test.js' --recursive --timeout 60000 ",
-    "prepublishOnly": "npm test && npm run lint",
-    "preversion": "npm run lint",
-    "postversion": "git push && git push --tags",
-    "version": "npm run format && git add -A src bin",
-    "publish-package": "npm publish",
-    "release": "npm run env &&  release-it patch --github.autoGenerate",
-    "release-local": "npm run env &&  release-it patch --github.autoGenerate --npm.publish=true  --git.commitMessage='release-patch v${version}'",
-    "release-dryrun": "npm run env &&  release-it patch  --github.autoGenerate --dry-run",
-    "release-minor": "npm run env &&  release-it minor"
+    "publish-package": "npm publish"
+
   },
   "bin": {
     "create-redirected-nginx-domain": "bin/redirected_domain.js",
     "create-static-nginx-domain": "bin/static_domain.js",
-    "delete-nginx-domain": "./bin/delete_domain.js",
-    "list-all-nginx-domains": "./bin/list_domain.js",
+    "delete-nginx-site": "./bin/delete_domain.js",
+    "list-all-nginx-sites": "./bin/list_domain.js",
     "@nginx-domain-assist/create-redirected-domain": "bin/redirected_domain.js",
     "@nginx-domain-assist/create-static-domain": "bin/static_domain.js",
-    "@nginx-domain-assist/delete-domain": "./bin/delete_domain.js",
-    "@nginx-domain-assist/list-domains": "./bin/list_domain.js"
+    "@nginx-domain-assist/delete-site": "./bin/delete_domain.js",
+    "@nginx-domain-assist/list-sites": "./bin/list_domain.js"
   },
   "nyc": {
     "check-coverage": true,
