@@ -1,0 +1,82 @@
+{
+  "name": "nginx-domain-assist",
+  "version": "1.0.0",
+  "description": "Manage Nginx on Ubuntu based Machines",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "coverage": "nyc npm run test",
+    "test": "mocha --experimental-loader=@istanbuljs/esm-loader-hook 'src/**/*.test.js' --recursive --timeout 60000 ",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "postversion": "git push && git push --tags",
+    "version": "npm run format && git add -A src bin",
+    "publish-package": "npm run build && npm publish",
+    "release": "npm run env &&  release-it patch --github.autoGenerate",
+    "release-local": "npm run env &&  release-it patch --github.autoGenerate --npm.publish=true  --git.commitMessage='release-patch v${version}'",
+    "release-dryrun": "npm run env &&  release-it patch  --github.autoGenerate --dry-run",
+    "release-minor": "npm run env &&  release-it minor"
+  },
+  "bin": {
+    "create-redirected-virtual-domain": "./bin/virtual_host_redirect.js",
+    "create-static-virtual-domain": "./bin/virtual_host_domain.js"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "all": true,
+    "include": [
+      "src/**/!(*.test.*).[tj]s?(x)"
+    ],
+    "reporter": [
+      "cobertura",
+      "html",
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "report-dir": "coverage"
+  },
+  "release-it": {
+    "hooks": {
+      "before:init": "npm test",
+      "after:git:release": "echo After git push, before github release",
+      "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
+    },
+    "git": {
+      "commitMessage": "muthuishere: release v${version}"
+    },
+    "npm": {
+      "publish": false
+    }
+  },
+  "keywords": [],
+  "author": "Muthukumaran Navaneethakrishnan(https://github.com/muthuishere/)",
+  "license": "MIT",
+  "homepage": "https://github.com/muthuishere/nginx-domain-assist",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:muthuishere/nginx-domain-assist.git"
+  },
+  "bugs": {
+    "url": "https://github.com/muthuishere/nginx-domain-assist/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "@istanbuljs/esm-loader-hook": "^0.2.0",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "prettier": "^2.7.1",
+    "release-it": "*",
+    "sinon": "^15.0.1"
+  },
+  "dependencies": {
+    "command-exists": "^1.2.9",
+    "inquirer": "^8.2.5",
+    "shelljs": "^0.8.5",
+    "which": "^3.0.0",
+    "yargs": "^17.6.2"
+  }
+}

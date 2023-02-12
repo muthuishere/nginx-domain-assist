@@ -1,0 +1,6 @@
+/test/resources/nginx/sites-available/*.conf
+/test/resources/nginx/sites-enabled/*.conf
+/node_modules/
+/.nyc_output/
+/.idea/
+/coverage/
