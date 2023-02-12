@@ -1,6 +1,6 @@
 {
   "name": "nginx-domain-assist",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "description": "Manage Nginx on Ubuntu based Machines",
   "main": "index.js",
   "type": "module",
@@ -48,7 +48,18 @@
       "publish": false
     }
   },
-  "keywords": [],
+  "keywords": [
+
+    "nginx",
+    "domain",
+    "redirect",
+    "static",
+    "site",
+    "create",
+    "ubuntu",
+    "linux"
+
+  ],
   "author": "Muthukumaran Navaneethakrishnan(https://github.com/muthuishere/)",
   "license": "MIT",
   "homepage": "https://github.com/muthuishere/nginx-domain-assist",

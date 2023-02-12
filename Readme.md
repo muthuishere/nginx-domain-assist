@@ -88,3 +88,14 @@ sudo list-all-nginx-sites
 
 ALternatively you can use the below packages
 [https://www.npmjs.com/package/nginx](https://www.npmjs.com/package/nginx)
+
+
+You can also use npx to run the commands
+```
+npx -p nginx-domain-assist list-all-nginx-sites
+```
+The above will list all sites available in /etc/nginx/sites-available
+
+
+#### License
+
