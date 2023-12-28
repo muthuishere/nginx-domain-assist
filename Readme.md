@@ -99,4 +99,6 @@ The above will list all sites available in /etc/nginx/sites-available
 
 
 #### License
+MIT
+
 

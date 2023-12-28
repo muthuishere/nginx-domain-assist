@@ -122,7 +122,9 @@ describe('Input argument processor tests', function () {
             '--domain',
             'example.com',
             '--path',
-            '/var/www/example.com'
+            '/var/www/example.com',
+            '--useSSL',
+            'true'
         ]
         const options = {
 
@@ -173,7 +175,7 @@ describe('Input argument processor tests', function () {
         console.log(responses);
 
         //expect responses contains domain: "example.com",path: "/var/www/example.com",nginxFolder: "/etc/nginx",useSSL: false
-        expect(responses).to.be.deep.contains({domain: "example.com",path: "/var/www/example.com",nginxFolder: "/etc/nginx",useSSL: false});
+        expect(responses).to.be.deep.contains({domain: "example.com",path: "/var/www/example.com",nginxFolder: "/etc/nginx",useSSL: true});
 
 
 

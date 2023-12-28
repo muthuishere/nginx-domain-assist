@@ -3,7 +3,7 @@ import {parsePortRedirectConfig} from "./template_parser.js";
 import {createSymbolicLink, writeFile} from "./shared/files.js";
 import * as Path from "path";
 import {enableSSL, restartNginx} from "./nginx.js";
-
+import fs from "fs";
 
 export async function createRedirectedDomain({nginxFolder, domain, port, useSSL}) {
 
@@ -20,6 +20,10 @@ export async function createRedirectedDomain({nginxFolder, domain, port, useSSL}
     let siteAvailableFolder = Path.join(nginxSitesAvailableFolder, domainName + '.conf');
     let siteEnabledLink = Path.join(nginxSitesEnabledFolder, domainName + '.conf');
 
+    if(fs.existsSync(siteAvailableFolder)){
+        console.log("Site already exists, please delete it first")
+        return false;
+    }
 
     // create ConfigFile
     const configFileContents = await parsePortRedirectConfig({domainName, redirectPort})
