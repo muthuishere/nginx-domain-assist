@@ -54,7 +54,7 @@ export async function getParametersBasedOnOptions(processArgs, cliOptions) {
 
     let inputs = yargs(hideBin(processArgs)).argv;
 
-    if (hasAllOptionsSet(inputs, cliOptions) == false) {
+    if (hasAllOptionsSet(inputs, cliOptions) === false) {
         inputs = await getInteractiveInputs(cliOptions);
     }
 
