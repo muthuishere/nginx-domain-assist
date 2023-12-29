@@ -51,7 +51,7 @@ sudo create-redirected-nginx-domain --domain "dev.test.com" --port 3456
 # and restart nginx
 ```
 
-![create-redirect.png](assets%2Fcreate-redirect.png)
+![create-redirect.png](assets/create-redirect.png)
 
 The above can also run in wizard mode , if you just run the command <i>create-redirected-nginx-domain</i> without any options
 
@@ -64,7 +64,7 @@ sudo create-static-nginx-domain --domain "static.test.com" --path "/var/www/html
 # > a symlink in /etc/nginx/sites-enabled/dev.test.com
 # > restart nginx
 ```
-![create-static.png](assets%2Fcreate-static.png)
+![create-static.png](assets/create-static.png)
 
 The above can also run in wizard mode , if you just run the command <i>create-static-nginx-domain</i> without any options
 

@@ -1,6 +1,6 @@
 {
   "name": "nginx-domain-assist",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Manage Nginx domains on Ubuntu based Machines",
   "main": "index.js",
   "type": "module",
@@ -83,7 +83,6 @@
     "sinon": "^15.0.1"
   },
   "dependencies": {
-    "@kubernetes/client-node": "^0.20.0",
     "command-exists": "^1.2.9",
     "dotenv": "^16.3.1",
     "inquirer": "^8.2.5",
