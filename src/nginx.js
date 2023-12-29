@@ -19,7 +19,8 @@ const commandExists = await doesOsHasCommand('systemctl');
         console.log('Sorry, this script requires certbot to be installed, to enable SSL');
         return
     }
-    return runProcess('certbot', ['--nginx', '-d' , domainName,  '-d' , "www." +domainName])
+    await runProcess('certbot', ['--nginx', '-d' , domainName,  '--non-interactive' ])
+    await runProcess('certbot', ['--nginx',  '-d' , "www." +domainName, '--non-interactive'])
 }
 
  export async function removeSSL(domainName) {
@@ -29,8 +30,8 @@ const commandExists = await doesOsHasCommand('systemctl');
         console.log('Sorry, this script requires certbot to be installed, to remove SSL');
         return
     }
-     await runProcess('certbot', ['delete', '--cert-name' , domainName])
-     await runProcess('certbot', ['delete', '--cert-name' , "www." +domainName])
+     await runProcess('certbot', ['delete', '--cert-name' , domainName ,"--non-interactive"])
+     await runProcess('certbot', ['delete', '--cert-name' , "www." +domainName , "--non-interactive"])
 }
 
 
