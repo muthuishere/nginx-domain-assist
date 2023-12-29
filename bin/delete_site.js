@@ -27,6 +27,17 @@ const options = {
         type: 'string',
         default: 'example.com',
     },
+    domain: {
+        // inquirer
+        message: 'Name of domain to be deleted from Nginx?',
+        name: 'domain',
+        // yargs
+        demandOption: true,
+        describe: 'Name of domain to be deleted from Nginx?',
+        // shared
+        type: 'string',
+        default: 'example.com',
+    }
 
 };
 

@@ -71,7 +71,7 @@ The above can also run in wizard mode , if you just run the command <i>create-st
 
 ##### To remove a site use the following command:
 ```
-sudo delete-nginx-site --site "static.test.com" 
+sudo delete-nginx-site --domain "static.test.com" 
 # it will remove 
 # > a file in /etc/nginx/sites-available/static.test.com.conf
 # > a symlink in /etc/nginx/sites-enabled/static.test.com.conf

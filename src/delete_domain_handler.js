@@ -4,7 +4,13 @@ import {removeSSL, restartNginx} from "./nginx.js";
 import fs from "fs";
 
 
-export async function deleteSiteInNginx({nginxFolder, site}) {
+export async function deleteSiteInNginx({nginxFolder, site,domain}) {
+
+
+    if(!!domain){
+         site=domain;
+    }
+
     const nginxSitesAvailableFolder = nginxFolder + Path.sep + 'sites-available'
     const nginxSitesEnabledFolder = nginxFolder + Path.sep + 'sites-enabled'
     let siteAvailableFile = Path.join(nginxSitesAvailableFolder, site + '.conf');

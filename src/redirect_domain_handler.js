@@ -23,7 +23,7 @@ export async function createRedirectedDomain({nginxFolder, domain, port, useSSL}
     const nginxSitesEnabledFolder = nginxFolder + Path.sep + 'sites-enabled'
     let siteAvailableConfigFile = Path.join(nginxSitesAvailableFolder, domainName + '.conf');
     let siteEnabledLink = Path.join(nginxSitesEnabledFolder, domainName + '.conf');
-
+    console.log("siteAvailableConfigFile",siteAvailableConfigFile);
     if(fs.existsSync(siteAvailableConfigFile)){
 
         const existingPort = getPortNumberFromFile(siteAvailableConfigFile);
