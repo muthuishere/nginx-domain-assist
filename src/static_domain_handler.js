@@ -4,6 +4,7 @@ import {createFolder, createSymbolicLink, writeFile} from "./shared/files.js";
 import * as Path from "path";
 import {enableSSL, restartNginx} from "./nginx.js";
 import fs from "fs";
+import {getPortNumberFromFile} from "./shared/nginxparser.js";
 
 
 export async function createStaticDomain({nginxFolder,domain,path,useSSL}){
@@ -21,11 +22,12 @@ export async function createStaticDomain({nginxFolder,domain,path,useSSL}){
     let {nginxFolder: nginxFolder1, domainName, staticDomainPath, useSSL: useSSL1} = input;
     const nginxSitesAvailableFolder = nginxFolder1 + Path.sep + 'sites-available'
     const nginxSitesEnabledFolder = nginxFolder1 + Path.sep + 'sites-enabled'
-    let siteAvailableFolder = Path.join(nginxSitesAvailableFolder, domainName + '.conf');
+    let siteAvailableConfig = Path.join(nginxSitesAvailableFolder, domainName + '.conf');
     let siteEnabledLink = Path.join(nginxSitesEnabledFolder, domainName + '.conf');
 
-    if(fs.existsSync(siteAvailableFolder)){
+    if(fs.existsSync(siteAvailableConfig)){
         console.log("Site already exists, please delete it first")
+
         return false;
     }
     //Create Domain Folder
@@ -34,10 +36,10 @@ export async function createStaticDomain({nginxFolder,domain,path,useSSL}){
 
     // create ConfigFile
     const configFileContents = await parseStaticConfig({domainName, staticDomainPath})
-    await writeFile(siteAvailableFolder, configFileContents)
+    await writeFile(siteAvailableConfig, configFileContents)
 
 
-    await createSymbolicLink(siteEnabledLink, siteAvailableFolder)
+    await createSymbolicLink(siteEnabledLink, siteAvailableConfig)
 
 
     await restartNginx();

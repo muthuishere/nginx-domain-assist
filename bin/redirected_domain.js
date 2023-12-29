@@ -63,7 +63,9 @@ const options = {
 
 
     try {
-        await createRedirectedDomain(inputs);
+       const {message} =  await createRedirectedDomain(inputs);
+        console.log(message);
+
         process.exit(0);
     }catch (err) {
         console.error(err);

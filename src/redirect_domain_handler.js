@@ -1,45 +1,66 @@
 import {parsePortRedirectConfig} from "./template_parser.js";
 
-import {createSymbolicLink, writeFile} from "./shared/files.js";
+import {createSymbolicLink, readFile, writeFile} from "./shared/files.js";
 import * as Path from "path";
 import {enableSSL, restartNginx} from "./nginx.js";
 import fs from "fs";
+import {getPortNumberFromFile, updatePortNumber} from "./shared/nginxparser.js";
 
 export async function createRedirectedDomain({nginxFolder, domain, port, useSSL}) {
 
-    const input = {
-        "nginxFolder": nginxFolder,
-        "domainName": domain,
-        "redirectPort": parseInt(port),
-        "useSSL": useSSL
-    }
-    console.log("Received Inputs", input);
-    let {nginxFolder: nginxFolder1, domainName, redirectPort, useSSL: useSSL1} = input;
-    const nginxSitesAvailableFolder = nginxFolder1 + Path.sep + 'sites-available'
-    const nginxSitesEnabledFolder = nginxFolder1 + Path.sep + 'sites-enabled'
-    let siteAvailableFolder = Path.join(nginxSitesAvailableFolder, domainName + '.conf');
+    // const input = {
+    //     "nginxFolder": nginxFolder,
+    //     "domainName": domain,
+    //     "redirectPort": parseInt(port),
+    //     "useSSL": useSSL
+    // }
+   const redirectPort = parseInt(port);
+    const domainName = domain;
+
+    // console.log("Received Inputs", input);
+    // let {nginxFolder: nginxFolder1, domainName, redirectPort, useSSL: useSSL1} = input;
+    const nginxSitesAvailableFolder = nginxFolder + Path.sep + 'sites-available'
+    const nginxSitesEnabledFolder = nginxFolder + Path.sep + 'sites-enabled'
+    let siteAvailableConfigFile = Path.join(nginxSitesAvailableFolder, domainName + '.conf');
     let siteEnabledLink = Path.join(nginxSitesEnabledFolder, domainName + '.conf');
 
-    if(fs.existsSync(siteAvailableFolder)){
-        console.log("Site already exists, please delete it first")
-        return false;
+    if(fs.existsSync(siteAvailableConfigFile)){
+
+        const existingPort = getPortNumberFromFile(siteAvailableConfigFile);
+        if(redirectPort === existingPort){
+            // console.log("Site already exists, returning it")
+            const message = `Site already exists ${domainName} with ${redirectPort}`
+            return {message};
+        }
+        const existingContents = await readFile(siteAvailableConfigFile);
+
+        const newContents = updatePortNumber(existingContents,redirectPort);
+        await writeFile(siteAvailableConfigFile,newContents);
+
+        // console.log("Site port changed to ",redirectPort)
+
+        const message =`Site already exists ${domainName} with ${existingPort} changed port to ${redirectPort}`
+        return {message};
     }
 
     // create ConfigFile
     const configFileContents = await parsePortRedirectConfig({domainName, redirectPort})
-    await writeFile(siteAvailableFolder, configFileContents)
+    await writeFile(siteAvailableConfigFile, configFileContents)
 
 
-    await createSymbolicLink(siteEnabledLink, siteAvailableFolder)
+    await createSymbolicLink(siteEnabledLink, siteAvailableConfigFile)
 
 
     await restartNginx();
 
-    if (useSSL1) {
+    let sslMessage =""
+    if (useSSL) {
         await enableSSL(domainName);
+        sslMessage = " and enabled SSL"
     }
-    console.log("Created Redirect Site on Nginx for domain: " + domain + " to be redirected to port running on " + port);
 
 
+   const message = `Created  site  ${domainName}  ${sslMessage} in Nginx  and  redirected to port  ${redirectPort}`;
+    return {message};
 }
 

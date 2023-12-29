@@ -61,6 +61,20 @@ export async function getParametersBasedOnOptions(processArgs, cliOptions) {
 
     const defaultValues = getDefaultValues(cliOptions);
     const formattedInputs = {...defaultValues, ...inputs}
+    for (const key in inputs) {
+        if (defaultValues.hasOwnProperty(key)) {
+            const defaultValue = defaultValues[key];
+            const inputValue = inputs[key];
+
+            if (typeof defaultValue === 'boolean') {
+                formattedInputs[key] = Boolean(inputValue);
+            } else if (typeof defaultValue === 'number') {
+                formattedInputs[key] = Number(inputValue);
+            } else {
+                formattedInputs[key] = inputValue;
+            }
+        }
+    }
     return formattedInputs;
 }
 
