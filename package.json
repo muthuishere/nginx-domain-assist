@@ -1,6 +1,6 @@
 {
   "name": "nginx-domain-assist",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "description": "Manage Nginx domains on Ubuntu based Machines",
   "main": "index.js",
   "type": "module",
@@ -14,7 +14,9 @@
     "create-redirected-nginx-domain": "bin/redirected_domain.js",
     "create-static-nginx-domain": "bin/static_domain.js",
     "delete-nginx-site": "bin/delete_site.js",
+    "delete-nginx-domain": "bin/delete_domain.js",
     "list-all-nginx-sites": "bin/list_sites.js",
+    "list-all-nginx-domains": "bin/list_sites.js",
     "@nginx-domain-assist/create-redirected-domain": "bin/redirected_domain.js",
     "@nginx-domain-assist/create-static-domain": "bin/static_domain.js",
     "@nginx-domain-assist/delete-site": "bin/delete_site.js",

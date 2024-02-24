@@ -71,7 +71,7 @@ The above can also run in wizard mode , if you just run the command <i>create-st
 
 ##### To remove a site use the following command:
 ```
-sudo delete-nginx-site --domain "static.test.com" 
+sudo delete-nginx-domain --domain "static.test.com" 
 # it will remove 
 # > a file in /etc/nginx/sites-available/static.test.com.conf
 # > a symlink in /etc/nginx/sites-enabled/static.test.com.conf
@@ -83,7 +83,7 @@ sudo delete-nginx-site --domain "static.test.com"
 
 ##### To list all sites configured use the following command:
 ```
-sudo list-all-nginx-sites
+sudo list-all-nginx-domains
 # it will list all sites available in /etc/nginx/sites-available
 ```
 
@@ -93,7 +93,7 @@ ALternatively you can use the below packages
 
 You can also use npx to run the commands
 ```
-npx -p nginx-domain-assist list-all-nginx-sites
+npx -p nginx-domain-assist list-all-nginx-domains
 ```
 The above will list all sites available in /etc/nginx/sites-available
 
