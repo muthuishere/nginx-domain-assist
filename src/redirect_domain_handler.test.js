@@ -9,7 +9,7 @@ import {readFile} from "./shared/files.js";
 import fs from "fs";
 
 
-describe('addition test',   function() {
+describe('redirect domain handler',   function() {
 
 
 
