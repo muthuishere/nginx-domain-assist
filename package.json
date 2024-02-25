@@ -1,6 +1,6 @@
 {
   "name": "nginx-domain-assist",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "description": "Manage Nginx domains on Ubuntu based Machines",
   "main": "index.js",
   "type": "module",

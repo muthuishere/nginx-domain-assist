@@ -1,5 +1,8 @@
 # Changes
 
+## Version 2.3.4
+
+- Issue fixes on site name
 ## Version 2.3.0
 
 - SSL enable /disable , make it non-interactive

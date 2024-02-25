@@ -4,13 +4,12 @@ import {removeSSL, restartNginx} from "./nginx.js";
 import fs from "fs";
 
 
-export async function deleteSiteInNginx({nginxFolder, site,domain}) {
+export async function deleteSiteInNginx({nginxFolder, site}) {
 
 
-    if(!!domain){
-         site=domain;
-    }
-    deleteDomainInNginx({nginxFolder,domain:site})
+
+
+    await deleteDomainInNginx({nginxFolder, domain: site})
 
 
 }
