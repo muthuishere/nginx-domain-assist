@@ -4,7 +4,7 @@
 ![Version](https://img.shields.io/npm/v/nginx-domain-assist)
 ![node-current](https://img.shields.io/node/v/nginx-domain-assist)
 
-
+  
 
 # Nginx Domain Assist
 
