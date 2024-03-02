@@ -1,5 +1,9 @@
 # Changes
 
+## Version 2.3.5
+
+- Updated Readme
+- added feature to list domain status by name
 ## Version 2.3.4
 
 - Issue fixes on site name

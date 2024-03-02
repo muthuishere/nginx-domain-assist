@@ -5,97 +5,93 @@
 ![node-current](https://img.shields.io/node/v/nginx-domain-assist)
 
 
-Nginx Domain Assist
-===================
 
-An NodeJS CLI to help you configure Nginx domains on your server with ease.
-it has CLI options and a wizard to help you configure your domains. (Works only in Ubuntu  as of now
+# Nginx Domain Assist
 
-The type of virtual host might be one of the following:
-- redirect domain requests to a port running on docker or kubernetes(e.g. 8080)
-- redirect to statically hosted site directory
+## Introduction
+Nginx Domain Assist is a Node.js console application designed to manage domains on an Nginx server. It simplifies the process of creating, deleting, listing, and checking the status of domains on nginx.
+
+## Features
+- **Create Redirected Nginx Domain**: Set up a domain with redirection (Used for Docker or Kubernetes nodePort redirection)
+- **Create Static Nginx Domain**: Initialize a static domain.
+- **Delete Nginx Domain**: Remove a domain from the server.
+- **List All Nginx Domains**: Display all domains hosted on the server.
+- **Domain Status By Name**: Check the status of a specific domain.
 
 
-#### install
 
+
+## Prerequisites
+
+Before using Nginx Domain Assist, ensure the following prerequisites are met:
+
+1. **Nginx Installed:** Nginx must be installed on your system. You can download and install Nginx from [Nginx's official website](http://nginx.org/) or through your operating system's package manager (like `apt` for Ubuntu, `yum` for CentOS).
+
+2. **Certbot for Let's Encrypt:** If you intend to use SSL functionalities (Let's Encrypt), Certbot should be installed. Certbot is an easy-to-use automatic client that fetches and deploys SSL/TLS certificates for your web server. Visit [Certbot's official website](https://certbot.eff.org/) for installation instructions specific to your operating system and web server.
+
+
+Ensure that these prerequisites are properly set up and configured before using Nginx Domain Assist to manage your Nginx domains.
+
+## Installation
+To install Nginx Domain Assist globally, run:
 ```
-
 npm install -g nginx-domain-assist
-
 ```
 
-can use npx as well
 
+## Usage
+After installation, the following commands are available globally. The Commands can be run directly in the terminal. If required options are not passed as arguments, the application will prompt you for them interactively. Also please note all the command requires sudo access to run.
 
-
-#### Features
-
-- can pass options to the CLI
-- has wizard mode as well to choose options
-- can create a virtual host for a domain and redirect to a port
-- can create a virtual host for a domain and serve from a directory
-- can list all domains
-- can delete domains
-
-
-#### Usage
-
-
-
-##### To create a domain and redirect to port use the following command:
+### Create Redirected Nginx Domain
 ```
-sudo create-redirected-nginx-domain --domain "dev.test.com" --port 3456
-
-# it will create a file in /etc/nginx/sites-available/dev.test.com to a port forwarded to 3456 ( assuming some app is watching on that port to serve http )
-# and create a symlink in /etc/nginx/sites-enabled/dev.test.com
-# and restart nginx
+create-redirected-nginx-domain --domain [domain] --port [port] --nginxFolder [path] --useSSL [boolean]
 ```
+- `--domain`: Name of the domain (default: example.com).
+- `--port`: Port number for the domain.
+- `--nginxFolder`: Location of the Nginx folder (default: /etc/nginx).
+- `--useSSL`: Boolean to decide if Let's Encrypt SSL should be applied (default: false).
 
+if no options are passed, the application will prompt you for the required options
 ![create-redirect.png](assets/create-redirect.png)
 
-The above can also run in wizard mode , if you just run the command <i>create-redirected-nginx-domain</i> without any options
-
-
-##### To create a domain and serve from a folder use the following command:
+### Create Static Nginx Domain
 ```
-sudo create-static-nginx-domain --domain "static.test.com" --path "/var/www/html" 
-# it will create
-# > a file in /etc/nginx/sites-available/static.test.com and serve from /var/www/html
-# > a symlink in /etc/nginx/sites-enabled/dev.test.com
-# > restart nginx
+create-static-nginx-domain --domain [domain] --path [path] --nginxFolder [path] --useSSL [boolean]
 ```
+- `--domain`: Name of the domain (default: example.com).
+- `--path`: Location of the static domain path (default: /var/www/example.com).
+- `--nginxFolder`: Location of the Nginx folder (default: /etc/nginx).
+- `--useSSL`: Boolean to decide if Let's Encrypt SSL should be applied (default: false).
+
+if no options are passed, the application will prompt you for the required options
 ![create-static.png](assets/create-static.png)
 
-The above can also run in wizard mode , if you just run the command <i>create-static-nginx-domain</i> without any options
-
-
-##### To remove a site use the following command:
+### Delete Nginx Domain
 ```
-sudo delete-nginx-domain --domain "static.test.com" 
-# it will remove 
-# > a file in /etc/nginx/sites-available/static.test.com.conf
-# > a symlink in /etc/nginx/sites-enabled/static.test.com.conf
-# > SSL certificates via certbot 
-# > restart nginx
+delete-nginx-domain --domain [domain] --nginxFolder [path]
 ```
+- `--domain`: Name of the domain to be deleted (default: example.com).
+- `--nginxFolder`: Location of the Nginx folder (default: /etc/nginx).
 
-
-
-##### To list all sites configured use the following command:
+### List All Nginx Domains
 ```
-sudo list-all-nginx-domains
-# it will list all sites available in /etc/nginx/sites-available
+list-all-nginx-domains --nginxFolder [path]
 ```
+- `--nginxFolder`: Location of the Nginx folder (default: /etc/nginx).
 
-ALternatively you can use the below packages
-[https://www.npmjs.com/package/nginx](https://www.npmjs.com/package/nginx)
+### Domain Status By Name
+```
+domain-status-by-name --domain [domain] --nginxFolder [path]
+```
+- `--domain`: Name of the domain (default: example.com).
+- `--nginxFolder`: Location of the Nginx folder (default: /etc/nginx).
 
 
-You can also use npx to run the commands
+
+Alternatively You can also use npx to run the commands
 ```
 npx -p nginx-domain-assist list-all-nginx-domains
 ```
-The above will list all sites available in /etc/nginx/sites-available
 
 
 #### License

@@ -1,6 +1,6 @@
 {
   "name": "nginx-domain-assist",
-  "version": "2.3.4",
+  "version": "2.3.5",
   "description": "Manage Nginx domains on Ubuntu based Machines",
   "main": "index.js",
   "type": "module",
@@ -12,11 +12,13 @@
   },
   "bin": {
     "create-redirected-nginx-domain": "bin/redirected_domain.js",
+    "domain-status-by-name": "bin/domain_status.js",
     "create-static-nginx-domain": "bin/static_domain.js",
-    "delete-nginx-site": "bin/delete_site.js",
     "delete-nginx-domain": "bin/delete_domain.js",
-    "list-all-nginx-sites": "bin/list_sites.js",
-    "list-all-nginx-domains": "bin/list_sites.js",
+    "list-all-nginx-domains": "bin/list_domains.js",
+
+    "list-all-nginx-sites": "bin/list_domains.js",
+    "delete-nginx-site": "bin/delete_site.js",
     "@nginx-domain-assist/create-redirected-domain": "bin/redirected_domain.js",
     "@nginx-domain-assist/create-static-domain": "bin/static_domain.js",
     "@nginx-domain-assist/delete-site": "bin/delete_site.js",
@@ -26,8 +28,14 @@
     "check-coverage": true,
     "all": true,
     "lines": 70,
+    "branches": 70,
+    "statements": 70,
     "include": [
       "src/**/!(*.test.*).[tj]s?(x)"
+    ],
+    "exclude": [
+      "src/nginx.js",
+      "src/shared/input_arg_processor.js"
     ],
     "reporter": [
       "cobertura",

@@ -16,7 +16,7 @@ export async function createStaticDomain({nginxFolder,domain,path,useSSL}){
         "useSSL":useSSL
     }
 
-    console.log("handleStatic",input);
+
 
 
     let {nginxFolder: nginxFolder1, domainName, staticDomainPath, useSSL: useSSL1} = input;
