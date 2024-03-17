@@ -51,14 +51,14 @@ export async function createRedirectedDomain({nginxFolder, domain, port, useSSL}
     await createSymbolicLink(siteEnabledLink, siteAvailableConfigFile)
 
 
-    await restartNginx();
+
 
     let sslMessage =""
     if (useSSL) {
         await enableSSL(domainName);
         sslMessage = " and enabled SSL"
     }
-
+    await restartNginx();
 
    const message = `Created  site  ${domainName}  ${sslMessage} in Nginx  and  redirected to port  ${redirectPort}`;
     return {message};

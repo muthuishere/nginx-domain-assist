@@ -1,5 +1,13 @@
 # Changes
 
+## Version 2.3.7
+
+- Nginx Restart after enabling SSL on create redirected domain and create static domain
+
+## Version 2.3.6
+
+- Updated Readme
+
 ## Version 2.3.5
 
 - Updated Readme

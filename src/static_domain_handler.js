@@ -42,11 +42,12 @@ export async function createStaticDomain({nginxFolder,domain,path,useSSL}){
     await createSymbolicLink(siteEnabledLink, siteAvailableConfig)
 
 
-    await restartNginx();
+
 
     if (useSSL1) {
         await enableSSL(domainName);
     }
+    await restartNginx();
     console.log("Created Static Site on Nginx for domain: " + domain + " to be served from path " + path);
 }
 
